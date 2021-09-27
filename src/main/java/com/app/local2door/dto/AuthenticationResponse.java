@@ -1,14 +1,16 @@
-package com.app.local2door.pojo;
+package com.app.local2door.dto;
 
 import java.io.Serializable;
 
 public class AuthenticationResponse implements Serializable{
 	private final String jwt;
     private final String type;
+    private final String email;
 
-    public AuthenticationResponse(String jwt,String type) {
+    public AuthenticationResponse(String jwt,String type,String email) {
         this.jwt = jwt;
         this.type = type;
+        this.email=email;
     }
 
     public String getType() {
@@ -18,4 +20,10 @@ public class AuthenticationResponse implements Serializable{
     public String getJwt() {
         return jwt;
     }
+
+	public String getId() {
+		return email;
+	}
+    
+    
 }

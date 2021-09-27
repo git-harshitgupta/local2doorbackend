@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DynamicUpdate
 public class Customer extends LoginDetails implements Serializable  {
 	private String name;
     @Column(name = "full_addreas")
@@ -25,10 +24,9 @@ public class Customer extends LoginDetails implements Serializable  {
     @Column(name = "join_date")
     private LocalDate joinDate;
 
-    @Column(name = "profile_image")
-    private String profileImage;
-    @OneToMany(mappedBy = "customerId")
-    private List<OrderDetails> orderDetailsList = new ArrayList<>();
+    @Lob
+    private byte[] profileImage;
+    
 
 
     public Customer() {
@@ -76,17 +74,16 @@ public class Customer extends LoginDetails implements Serializable  {
         this.type = type;
     }
 
-    public String getProfileImage() {
-        return profileImage;
-    }
+	public byte[] getProfileImage() {
+		return profileImage;
+	}
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
+	public void setProfileImage(byte[] profileImage) {
+		this.profileImage = profileImage;
+	}
 
-    public void addOrderDetails(OrderDetails orderDetails){
-        orderDetailsList.add(orderDetails);
-        orderDetails.setCustomerId(this);
-    }
+    
+
+   
 
 }

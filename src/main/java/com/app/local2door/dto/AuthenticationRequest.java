@@ -1,4 +1,4 @@
-package com.app.local2door.pojo;
+package com.app.local2door.dto;
 
 import java.io.Serializable;
 

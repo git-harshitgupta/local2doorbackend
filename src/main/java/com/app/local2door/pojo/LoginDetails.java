@@ -15,7 +15,9 @@ public class LoginDetails implements Serializable {
 	    private long mobileNo;
 	    @Enumerated(EnumType.STRING)
 	    private Type user;
-	    private String location;
+	    private double longi;
+	    private double lati;
+	  
 
 	    public LoginDetails() {
 	    }
@@ -23,8 +25,27 @@ public class LoginDetails implements Serializable {
 	    public Integer getId() {
 	        return id;
 	    }
+	    
 
-	    public void setId(Integer id) {
+	    
+
+		public double getLongi() {
+			return longi;
+		}
+
+		public void setLongi(double longi) {
+			this.longi = longi;
+		}
+
+		public double getLati() {
+			return lati;
+		}
+
+		public void setLati(double lati) {
+			this.lati = lati;
+		}
+
+		public void setId(Integer id) {
 	        this.id = id;
 	    }
 
@@ -60,11 +81,5 @@ public class LoginDetails implements Serializable {
 	        this.user = user;
 	    }
 
-	    public String getLocation() {
-	        return location;
-	    }
-
-	    public void setLocation(String location) {
-	        this.location = location;
-	    }
+	    
 }

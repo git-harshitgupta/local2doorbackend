@@ -2,35 +2,39 @@ package com.app.local2door.pojo;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DynamicUpdate
+@ToString
 public class Product {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Integer productId;
     @Column(name = "product_name")
     private String productName;
     @Column(name = "product_quantity")
-    private int productQuantity;
+    private double productQuantity;
     @Column(name = "product_unit")
     @Enumerated(EnumType.STRING)
     private Unit productUnit;
     @Column(name = "product_price")
     private double productPrice;
-    private String review;
+    
+    
     @Column(name = "added_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate addedDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopkeeper_id")
     private Shopkeeper shopkeeperId;
-
-
+    private long version;
+    
     public LocalDate getAddedDate() {
         return addedDate;
     }
@@ -39,7 +43,7 @@ public class Product {
         this.addedDate = addedDate;
     }
 
-
+    
 
     public Shopkeeper getShopkeeperId() {
         return shopkeeperId;
@@ -68,11 +72,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getProductQuantity() {
+    public double getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(double productQuantity) {
         this.productQuantity = productQuantity;
     }
 
@@ -92,11 +96,27 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public String getReview() {
-        return review;
-    }
+    
 
-    public void setReview(String review) {
-        this.review = review;
-    }
+   
+	
+
+	public Product(String productName, double productQuantity, Unit productUnit, double productPrice, 
+			LocalDate addedDate) {
+		super();
+		this.productName = productName;
+		this.productQuantity = productQuantity;
+		this.productUnit = productUnit;
+		this.productPrice = productPrice;
+		
+		this.addedDate = addedDate;
+	}
+	@Version
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
 }

@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.app.local2door.dao.ILoginDao;
+import com.app.local2door.dao.ICustomerDao;
+
+import com.app.local2door.dao.IShopkeeperDao;
 import com.app.local2door.pojo.Customer;
 import com.app.local2door.pojo.Shopkeeper;
 
@@ -17,13 +19,17 @@ import java.util.ArrayList;
 @Service
 public class MyCustomerDetailsService implements UserDetailsService {
     @Autowired
-    ILoginDao loginDao;
+    ICustomerDao customerDao;
+    @Autowired
+    IShopkeeperDao shopkeeperDao;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Customer customer=loginDao.getCustomerDetails(email);
-        Shopkeeper shopkeeper=loginDao.getShopKeeperDetails(email);
-        if(customer!=null)
+        Customer customer=customerDao.findByEmail(email);
+        Shopkeeper shopkeeper=shopkeeperDao.findByEmail(email);
+        if(customer!=null) {
+        	System.out.println("Customer");
             return new User(customer.getEmail(), customer.getPassword(), new ArrayList<>());
+         }
         else if(shopkeeper!=null)
             return new User(shopkeeper.getEmail(), shopkeeper.getPassword(), new ArrayList<>());
         else

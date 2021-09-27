@@ -4,16 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
-
+@ToString
 public class User implements Serializable {
     private String name;
     private String email;
     private String password;
-    private String location;
+    private double longi;
+    private double lati;
     private String houseNo;
     private String fullAddreas;
     private String mobileNo;
@@ -26,8 +29,10 @@ public class User implements Serializable {
     public String getShopRegId() {
         return shopRegId;
     }
+    
+    
 
-    public void setShopRegId(String shopRegId) {
+	public void setShopRegId(String shopRegId) {
         this.shopRegId = shopRegId;
     }
 
@@ -63,14 +68,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+ 
     public String getHouseNo() {
         return houseNo;
     }
@@ -102,4 +100,20 @@ public class User implements Serializable {
     public void setUser(String user) {
         this.user = user;
     }
+
+	public double getLongi() {
+		return longi;
+	}
+
+	public void setLongi(double longi) {
+		this.longi = longi;
+	}
+
+	public double getLati() {
+		return lati;
+	}
+
+	public void setLati(double lati) {
+		this.lati = lati;
+	}
 }
