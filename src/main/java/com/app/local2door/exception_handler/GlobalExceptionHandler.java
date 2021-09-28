@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDateTime;
 
+import javax.persistence.OptimisticLockException;
+
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -32,8 +34,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse resp=new ErrorResponse("Some product went out of stock", LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resp);
     }
-    @ExceptionHandler(OptimisticLockingFailureException.class)
-    public ResponseEntity<?> handleOptimiticLockingException(OptimisticLockingFailureException e){
+    @ExceptionHandler(OptimisticLockException.class)
+    public ResponseEntity<?> handleOptimiticLockingException(OptimisticLockException e){
     	ErrorResponse resp=new ErrorResponse("Transaction failed please try again", LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resp);
     }

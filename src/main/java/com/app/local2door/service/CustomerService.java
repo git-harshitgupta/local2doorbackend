@@ -3,11 +3,11 @@ package com.app.local2door.service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.transaction.Transactional;
 
-import org.hibernate.engine.transaction.jta.platform.internal.SapNetWeaverJtaPlatform;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

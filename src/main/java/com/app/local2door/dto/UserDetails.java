@@ -18,6 +18,10 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class UserDetails implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String fullAdd;
 	private String houseNo;

@@ -1,11 +1,11 @@
 package com.app.local2door.pojo;
 
 import java.io.Serializable;
-import java.security.KeyStore.PrivateKeyEntry;
+
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
+@DynamicUpdate
 public class ProductList implements Serializable{
 	 	
 	private static final long serialVersionUID = 1L;
@@ -36,9 +37,7 @@ public class ProductList implements Serializable{
 		@Column(name = "product_unit")
 		@Enumerated(EnumType.STRING)
 	    private Unit productUnit;
-//		@ManyToOne(fetch = FetchType.LAZY)
-//	    @JoinColumn(name = "shopkeeper_id")
-//	    private Shopkeeper shopkeeperId;	    
+
 		
 	    
 	    

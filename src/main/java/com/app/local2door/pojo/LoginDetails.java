@@ -2,10 +2,17 @@ package com.app.local2door.pojo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.DynamicUpdate;
 @MappedSuperclass
+@DynamicUpdate
 public class LoginDetails implements Serializable {
 	
-	 	@Id
+	 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;
 	    @Column(unique = true)

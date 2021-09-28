@@ -1,5 +1,5 @@
 package com.app.local2door.pojo;
-import lombok.AllArgsConstructor;
+
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,11 +7,14 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
+@DynamicUpdate
 public class Customer extends LoginDetails implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
     @Column(name = "full_addreas")
     private String fullAddreas;

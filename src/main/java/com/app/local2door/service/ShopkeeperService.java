@@ -101,6 +101,7 @@ public class ShopkeeperService implements IShopkeeperService{
 	public ShopkeeperOrderResponse updateOrderStatusToDelivered(int orderId) {
 		OrderDetails orderDetails = orderDetailsDao.findById(orderId).get();
 		orderDetails.setStatus("Delivered");
+		orderDetails.setPayment("true");
 		orderDetailsDao.save(orderDetails);
 		return orderDetailsDao.getSingleOrderDetailsForShopkeeper(orderId);
 	}

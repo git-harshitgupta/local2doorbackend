@@ -33,6 +33,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopkeeper_id")
     private Shopkeeper shopkeeperId;
+    @Version
     private long version;
     
     public LocalDate getAddedDate() {
@@ -111,7 +112,7 @@ public class Product {
 		
 		this.addedDate = addedDate;
 	}
-	@Version
+	
 	public long getVersion() {
 		return version;
 	}
