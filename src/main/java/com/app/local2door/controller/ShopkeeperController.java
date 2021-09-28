@@ -45,10 +45,12 @@ public class ShopkeeperController {
 		return shopkeeperService.getShopkeeperName(username); 
 	}
 	@PostMapping("/addproduct")
-	public ResponseEntity<?> addProduct(@RequestHeader("email") String email,@RequestBody Product product){
-		
+	public ResponseEntity<?> addProduct(@RequestHeader("Authorization") String authorization,@RequestBody Product product){
+		String jwt = authorization.substring(7);
+		System.out.println(jwt);
+        String username = jwtTokenHelper.extractUsername(jwt);
         System.out.println(product);
-        return new ResponseEntity<>(shopkeeperService.addProduct(email,product),HttpStatus.CREATED);
+        return new ResponseEntity<>(shopkeeperService.addProduct(username,product),HttpStatus.CREATED);
 	}
 	@GetMapping("/getallproduct")
 	public List<ProductResponse> getAllProduct(@RequestHeader("Authorization") String authorization){

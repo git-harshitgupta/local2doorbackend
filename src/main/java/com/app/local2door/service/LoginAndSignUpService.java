@@ -5,16 +5,18 @@ import java.time.LocalDate;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.local2door.custom_excpt.EmailExistException;
 import com.app.local2door.custom_excpt.NumberAlreadyInUseException;
 import com.app.local2door.dao.ICustomerDao;
 import com.app.local2door.dao.IShopkeeperDao;
+import com.app.local2door.dto.User;
 import com.app.local2door.pojo.Customer;
 import com.app.local2door.pojo.Shopkeeper;
 import com.app.local2door.pojo.Type;
-import com.app.local2door.pojo.User;
 
 @Service
 @Transactional
@@ -23,7 +25,8 @@ public class LoginAndSignUpService implements ILoginAndSignUpService {
     ICustomerDao customerDao;
     @Autowired
     IShopkeeperDao shopKeeperDao;
-    
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -41,13 +44,14 @@ public class LoginAndSignUpService implements ILoginAndSignUpService {
     
 
     @Override
-    public Customer saveUserDetails(User user) {
-        System.out.println("Inside user details");
+    public Integer saveUserDetails(User user) {
+        
 
             Customer customer = new Customer();
             customer.setUser(Type.CUSTOMER);
             customer.setEmail(user.getEmail());
-            customer.setPassword(user.getPassword());
+           
+            customer.setPassword(passwordEncoder.encode(user.getPassword()));
             customer.setName(user.getName());
             customer.setFullAddreas(user.getFullAddreas());
             customer.setLongi(user.getLongi());
@@ -55,16 +59,17 @@ public class LoginAndSignUpService implements ILoginAndSignUpService {
             customer.setHouseNo(user.getHouseNo());
             customer.setMobileNo(Long.parseLong(user.getMobileNo()));
             customer.setJoinDate(LocalDate.now());
-            return customerDao.save(customer);
+            customerDao.save(customer);
+            return customer.getId();
 
     }
 
     @Override
-    public Shopkeeper saveShopkeeperDetails(User user) {
+    public Integer saveShopkeeperDetails(User user) {
         Shopkeeper shopkeeper = new Shopkeeper();
         shopkeeper.setUser(Type.SHOPKEEPER);
         shopkeeper.setEmail(user.getEmail());
-        shopkeeper.setPassword(user.getPassword());
+        shopkeeper.setPassword(passwordEncoder.encode(user.getPassword()));
         shopkeeper.setShopName(user.getShopName());
         shopkeeper.setShopAddreas(user.getFullAddreas());
         shopkeeper.setLongi(user.getLongi());
@@ -73,7 +78,8 @@ public class LoginAndSignUpService implements ILoginAndSignUpService {
         shopkeeper.setShopRegisterationId(user.getShopRegId());
         shopkeeper.setMobileNo(Long.parseLong(user.getMobileNo()));
         shopkeeper.setJoinDate(LocalDate.now());
-        return shopKeeperDao.save(shopkeeper);
+         shopKeeperDao.save(shopkeeper);
+         return shopkeeper.getId();
     }
 
 

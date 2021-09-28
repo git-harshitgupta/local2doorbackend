@@ -3,6 +3,10 @@ package com.app.local2door.dto;
 import java.io.Serializable;
 
 public class AuthenticationResponse implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String jwt;
     private final String type;
     private final String email;

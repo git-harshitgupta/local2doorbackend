@@ -1,18 +1,19 @@
-package com.app.local2door.pojo;
+package com.app.local2door.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import lombok.ToString;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.Serializable;
 
 @ToString
 public class User implements Serializable {
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
     private String email;
     private String password;
     private double longi;
